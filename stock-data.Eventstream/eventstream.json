@@ -1,0 +1,43 @@
+{
+  "sources": [
+    {
+      "id": "e293702b-a951-44c9-875f-2151e6f56adc",
+      "name": "stock",
+      "type": "SampleData",
+      "properties": {
+        "type": "StockMarket"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "id": "e83792aa-9fc5-4560-837e-849e9294d6c3",
+      "name": "6836471f-da8a-4a08-9de9-fc238e6d1fe6",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "DirectIngestion",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "eccdf5f0-7a04-8fdf-4d2c-e749e8f738f3",
+        "tableName": "stock",
+        "connectionName": "stock-table",
+        "mappingRuleName": "stock_mapping"
+      },
+      "inputNodes": [
+        {
+          "name": ""
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "04ce86bd-4150-4dde-8ae0-9bdb6667b2e1",
+      "name": "stock-data-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": []
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.0"
+}

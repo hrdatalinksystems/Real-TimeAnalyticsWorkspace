@@ -1,0 +1,22 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "4517cf22-e737-4f01-858a-51e9d4a72147",
+        "clusterUri": "",
+        "type": "Fabric",
+        "databaseItemId": "32e2b49b-b9cd-a151-4263-755e481c685d",
+        "databaseItemName": "RTISample"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "855be468-9e02-4b9e-933e-12c53089150d",
+        "content": "Bikestream\n| summarize [\"Total Number of Bikes\"] = sum(No_Bikes) by Neighbourhood\n| project  Neighbourhood, ['Total Number of Bikes']\n\nBikestream\n| where isnull(Neighbourhood) or isempty( Neighbourhood)\n\nBikestream\n| where Neighbourhood == \"Chelsea\"\n| summarize [\"Total Number of Bikes\"] = sum(No_Bikes) by Neighbourhood\n| project  Neighbourhood = case(isempty( Neighbourhood) or isnull( Neighbourhood), \"Unidentified\", Neighbourhood), ['Total Number of Bikes']\n| sort by Neighbourhood asc\n\nselect top 100 * from Bikestream\n\nselect  (case when Neighbourhood is null or Neighbourhood = ''\n            then 'Unidentified'\n            else Neighbourhood\n        end) as Neighbourhood,\n        sum(No_Bikes)\nfrom    Bikestream\ngroup by (case when Neighbourhood is null or Neighbourhood = ''\n            then 'Unidentified'\n            else Neighbourhood\n        end)\nhaving Neighbourhood = 'Chelsea'",
+        "title": "Tab",
+        "dataSourceId": "4517cf22-e737-4f01-858a-51e9d4a72147"
+      }
+    ]
+  }
+}

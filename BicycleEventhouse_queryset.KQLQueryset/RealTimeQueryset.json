@@ -1,0 +1,28 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "6649bd80-2745-41a6-ab8b-f781a6e235de",
+        "clusterUri": "",
+        "type": "Fabric",
+        "databaseItemId": "779ae675-d5a4-8c39-4b78-6326a6e084da",
+        "databaseItemName": "BicycleEventhouse"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "5fb569ce-84ca-48b8-a546-ddc702acbe2c",
+        "content": "// See the most recent data - records ingested in the last 24 hours.\nbikes\n| where ingestion_time() between (now(-1d) .. now())\n\n\n\n",
+        "title": "Tab",
+        "dataSourceId": "6649bd80-2745-41a6-ab8b-f781a6e235de"
+      },
+      {
+        "id": "0e42ef8f-1914-4f33-a38d-2e1c083dd553",
+        "content": "// Use 'take' to view a sample number of records in the table and check the data.\n['bikes-by-street']\n| summarize TotalBikes = sum(tolong(SUM_No_Bikes)) by Window_End_Time, Street\n| sort by Window_End_Time desc, Street desc\n",
+        "title": "",
+        "dataSourceId": "6649bd80-2745-41a6-ab8b-f781a6e235de"
+      }
+    ]
+  }
+}

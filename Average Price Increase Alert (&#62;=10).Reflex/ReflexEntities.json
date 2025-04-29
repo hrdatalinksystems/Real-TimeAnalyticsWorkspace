@@ -1,0 +1,154 @@
+[
+  {
+    "uniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709",
+    "payload": {
+      "name": "Stock Dashboard 1",
+      "type": "kqlQueries"
+    },
+    "type": "container-v1"
+  },
+  {
+    "uniqueIdentifier": "5b35d05e-10e5-43bb-aeaf-3040a995dbf8",
+    "payload": {
+      "name": "StockEventhouse event",
+      "runSettings": {
+        "executionIntervalInSeconds": 300
+      },
+      "query": {
+        "queryString": "stock\n| where ['time'] > ago(5m)\n| summarize avgPrice = avg(todecimal(bidPrice)) by symbol\n| project symbol, avgPrice"
+      },
+      "eventhouseItem": {
+        "itemId": "eccdf5f0-7a04-8fdf-4d2c-e749e8f738f3",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemType": "KustoDatabase"
+      },
+      "queryParameters": [],
+      "metadata": {
+        "workspaceId": "d1a1abbd-3be7-403b-b50e-45dee13929d4",
+        "measureName": "avgPrice",
+        "dashboardId": "6cc3109a-18b5-4e1f-a2be-239464d1f9cc",
+        "visualId": "897720fd-c030-43b1-b01d-d2fd0f69472f"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709"
+      }
+    },
+    "type": "kqlSource-v1"
+  },
+  {
+    "uniqueIdentifier": "6da86893-2c95-4166-b7b3-60f21d674583",
+    "payload": {
+      "name": "StockEventhouse event",
+      "parentContainer": {
+        "targetUniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709"
+      },
+      "definition": {
+        "type": "Event",
+        "instance": "{\"templateId\":\"SourceEvent\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"SourceEventStep\",\"id\":\"e9f18178-af4f-499d-927c-e9b62ce8f61e\",\"rows\":[{\"name\":\"SourceSelector\",\"kind\":\"SourceReference\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"5b35d05e-10e5-43bb-aeaf-3040a995dbf8\"}]}]}]}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "aac8678a-1f2b-4097-a876-56d26eab8b71",
+    "payload": {
+      "name": "symbol",
+      "parentContainer": {
+        "targetUniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709"
+      },
+      "definition": {
+        "type": "Object"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "b6d3ed62-c2f4-4b4e-a0cf-250d015e4630",
+    "payload": {
+      "name": "symbol",
+      "parentObject": {
+        "targetUniqueIdentifier": "aac8678a-1f2b-4097-a876-56d26eab8b71"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"templateId\":\"IdentityPartAttribute\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"IdPartStep\",\"id\":\"818e1f3c-967e-4e4d-904f-5f17e58b291f\",\"rows\":[{\"name\":\"TypeAssertion\",\"kind\":\"TypeAssertion\",\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"Text\"},{\"name\":\"format\",\"type\":\"string\",\"value\":\"\"}]}]}]}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "7f7a7b95-f052-4e0e-8ea7-88d32c0f693d",
+    "payload": {
+      "name": "symbol tuple",
+      "parentObject": {
+        "targetUniqueIdentifier": "aac8678a-1f2b-4097-a876-56d26eab8b71"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"templateId\":\"IdentityTupleAttribute\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"IdStructureStep\",\"id\":\"43c85438-0b93-44f4-aa46-feab3aaaafb1\",\"rows\":[{\"name\":\"IdPart\",\"kind\":\"IdPart\",\"arguments\":[{\"kind\":\"AttributeReference\",\"type\":\"complex\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"b6d3ed62-c2f4-4b4e-a0cf-250d015e4630\"}],\"name\":\"idPart\"}]}]}]}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "b3273fd6-7785-4f88-bef5-9cf0b6448850",
+    "payload": {
+      "name": "StockEventhouse event by symbol",
+      "parentObject": {
+        "targetUniqueIdentifier": "aac8678a-1f2b-4097-a876-56d26eab8b71"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709"
+      },
+      "definition": {
+        "type": "Event",
+        "instance": "{\"templateId\":\"SplitEvent\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"SplitEventStep\",\"id\":\"fa7da031-bbee-4cee-86ae-eb109c526be4\",\"rows\":[{\"name\":\"EventSelector\",\"kind\":\"Event\",\"arguments\":[{\"kind\":\"EventReference\",\"type\":\"complex\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"6da86893-2c95-4166-b7b3-60f21d674583\"}],\"name\":\"event\"}]},{\"name\":\"FieldIdMapping\",\"kind\":\"FieldIdMapping\",\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"symbol\"},{\"kind\":\"AttributeReference\",\"type\":\"complex\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"b6d3ed62-c2f4-4b4e-a0cf-250d015e4630\"}],\"name\":\"idPart\"}]},{\"name\":\"SplitEventOptions\",\"kind\":\"EventOptions\",\"arguments\":[{\"name\":\"isAuthoritative\",\"type\":\"boolean\",\"value\":true}]}]}]}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "e63d4f38-f1df-4a9f-8506-128d161075e4",
+    "payload": {
+      "name": "avgPrice",
+      "parentObject": {
+        "targetUniqueIdentifier": "aac8678a-1f2b-4097-a876-56d26eab8b71"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709"
+      },
+      "definition": {
+        "type": "Attribute",
+        "instance": "{\"templateId\":\"BasicEventAttribute\",\"templateVersion\":\"1.1\",\"steps\":[{\"name\":\"EventSelectStep\",\"id\":\"6e604703-5000-4862-a575-bd8c6345270f\",\"rows\":[{\"name\":\"EventSelector\",\"kind\":\"Event\",\"arguments\":[{\"kind\":\"EventReference\",\"type\":\"complex\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"b3273fd6-7785-4f88-bef5-9cf0b6448850\"}],\"name\":\"event\"}]},{\"name\":\"EventFieldSelector\",\"kind\":\"EventField\",\"arguments\":[{\"name\":\"fieldName\",\"type\":\"string\",\"value\":\"avgPrice\"}]}]},{\"name\":\"EventComputeStep\",\"id\":\"4b2296ac-8158-49b4-97f1-f371dc1701c2\",\"rows\":[{\"name\":\"TypeAssertion\",\"kind\":\"TypeAssertion\",\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"Text\"},{\"name\":\"format\",\"type\":\"string\",\"value\":\"\"}]}]}]}"
+      }
+    },
+    "type": "timeSeriesView-v1"
+  },
+  {
+    "uniqueIdentifier": "e946d025-0a68-42c7-84b3-3e4842647f6a",
+    "payload": {
+      "name": "StockEventhouse alert",
+      "parentObject": {
+        "targetUniqueIdentifier": "aac8678a-1f2b-4097-a876-56d26eab8b71"
+      },
+      "parentContainer": {
+        "targetUniqueIdentifier": "174d9e7e-5f50-4901-9178-c48bda9d2709"
+      },
+      "definition": {
+        "type": "Rule",
+        "instance": "{\"templateId\":\"AttributeTrigger\",\"templateVersion\":\"1.1.1\",\"steps\":[{\"name\":\"ScalarSelectStep\",\"id\":\"d31f6f0b-f526-4f8a-844f-de70332876a5\",\"rows\":[{\"name\":\"AttributeSelector\",\"kind\":\"Attribute\",\"arguments\":[{\"kind\":\"AttributeReference\",\"type\":\"complex\",\"arguments\":[{\"name\":\"entityId\",\"type\":\"string\",\"value\":\"e63d4f38-f1df-4a9f-8506-128d161075e4\"}],\"name\":\"attribute\"}]}]},{\"name\":\"ScalarDetectStep\",\"id\":\"c63b2802-074e-45ce-b949-19f61b22f9af\",\"rows\":[{\"arguments\":[{\"name\":\"op\",\"type\":\"string\",\"value\":\"ChangesByAtLeast\"},{\"name\":\"offset\",\"type\":\"number\",\"value\":1},{\"name\":\"inPercent\",\"type\":\"boolean\",\"value\":false}],\"kind\":\"NumberTrendsBy\",\"name\":\"NumberTrends\"}]},{\"name\":\"ActStep\",\"id\":\"1fdbbaac-bdf8-4671-bd94-8388d3b329cd\",\"rows\":[{\"name\":\"EmailBinding\",\"kind\":\"EmailMessage\",\"arguments\":[{\"name\":\"messageLocale\",\"type\":\"string\",\"value\":\"\"},{\"name\":\"sentTo\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"hr@datalinksystems.co.uk\"}]},{\"name\":\"copyTo\",\"type\":\"array\",\"values\":[]},{\"name\":\"bCCTo\",\"type\":\"array\",\"values\":[]},{\"name\":\"subject\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"Activator Trigger: New event from StockEventhouse alert\"}]},{\"name\":\"headline\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"New event from StockEventhouse alert\"}]},{\"name\":\"optionalMessage\",\"type\":\"array\",\"values\":[{\"type\":\"string\",\"value\":\"\"}]},{\"name\":\"additionalInformation\",\"type\":\"array\",\"values\":[]}]}]}]}",
+        "settings": {
+          "shouldRun": true,
+          "shouldApplyRuleOnUpdate": true
+        }
+      }
+    },
+    "type": "timeSeriesView-v1"
+  }
+]

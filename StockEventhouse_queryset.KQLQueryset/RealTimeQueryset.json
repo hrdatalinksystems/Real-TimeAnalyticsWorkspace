@@ -1,0 +1,22 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "5be7079e-aae6-465b-b730-1d5be2fb4d1e",
+        "clusterUri": "",
+        "type": "Fabric",
+        "databaseItemId": "eccdf5f0-7a04-8fdf-4d2c-e749e8f738f3",
+        "databaseItemName": "StockEventhouse"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "d9b9cfe1-4d95-4c8e-a01e-0ed59c471cec",
+        "content": "\n// Use \"take\" to view a sample number of records in the table and check the data.\n//stock\n//| take 100\n\nstock\n| where ['time'] > ago(5m)\n| summarize avgPrice = avg(todecimal(bidPrice)) by symbol\n| project symbol, avgPrice\n\n// See how many records are in the table.\n//YOUR_TABLE_HERE\n//| count\n\n// This query returns the number of ingestions per hour in the given table.\n//YOUR_TABLE_HERE\n//| summarize IngestionCount = count() by bin(ingestion_time(), 1h)\n\n",
+        "title": "Tab",
+        "dataSourceId": "5be7079e-aae6-465b-b730-1d5be2fb4d1e"
+      }
+    ]
+  }
+}

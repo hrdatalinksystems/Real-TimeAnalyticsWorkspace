@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "KQLQueryset",
+    "displayName": "BicycleEventhouse_queryset",
+    "description": "BicycleEventhouse_queryset"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2430fb9c-30b5-ad9d-4854-cb7fa0fd7cec"
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "schema_version": "60",
+  "autoRefresh": {
+    "enabled": true,
+    "defaultInterval": "30m"
+  },
+  "tiles": [
+    {
+      "id": "3e0fb58c-5063-4d86-92dc-35e8f8d9a580",
+      "title": "Bikes and Docks",
+      "visualType": "stackedbar",
+      "pageId": "851c46ee-e4e2-43cd-97e9-c904f104a999",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 11,
+        "height": 15
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "9f6f727c-9859-4dfd-bfba-c1a448b2fdae"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": null,
+        "yColumns": [
+          "No_Bikes",
+          "No_Empty_Docks"
+        ],
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "drillthrough": []
+      }
+    },
+    {
+      "id": "d7e07658-d740-4a1c-b93e-6b8413f5fbd9",
+      "title": "Bike Locations",
+      "visualType": "map",
+      "pageId": "851c46ee-e4e2-43cd-97e9-c904f104a999",
+      "layout": {
+        "x": 11,
+        "y": 0,
+        "width": 13,
+        "height": 15
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "00462e8d-1a3b-49a6-9d27-02aa1c020005"
+      },
+      "visualOptions": {
+        "map__type": "bubble",
+        "map__latitudeColumn": "Latitude",
+        "map__longitudeColumn": "Longitude",
+        "map__labelColumn": null,
+        "map__sizeColumn": null,
+        "map__sizeDisabled": false,
+        "map__geoType": "numeric",
+        "map__geoPointColumn": null
+      }
+    },
+    {
+      "id": "b84f4354-b116-429a-91c6-2b32bec08dcf",
+      "title": "New tile",
+      "visualType": "table",
+      "pageId": "5b97b5ca-af3d-4743-ba66-f5b6a3c97fe9",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 9,
+        "height": 15
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "c84a3515-cf83-44e1-851e-96799b4f6c00"
+      },
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": true,
+        "colorStyle": "light",
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
+    }
+  ],
+  "baseQueries": [
+    {
+      "id": "06e5514c-60fc-417a-8d17-5fb754c45a25",
+      "queryId": "91370783-4bc7-419f-afc3-0f70cf2d590c",
+      "variableName": "base_bike_data"
+    }
+  ],
+  "parameters": [
+    {
+      "kind": "duration",
+      "id": "bef441d1-e837-4f40-a4d1-b3e856e71afe",
+      "displayName": "Time range",
+      "description": "",
+      "beginVariableName": "_startTime",
+      "endVariableName": "_endTime",
+      "defaultValue": {
+        "kind": "dynamic",
+        "count": 1,
+        "unit": "hours"
+      },
+      "showOnPages": {
+        "kind": "all"
+      }
+    },
+    {
+      "kind": "string",
+      "id": "e3aa97cf-c614-4580-82bb-5160e95f2fea",
+      "displayName": "Neighbourhood",
+      "description": "Choose neighbourhoods",
+      "variableName": "selected_neighbourhoods",
+      "selectionType": "array",
+      "includeAllOption": true,
+      "defaultValue": {
+        "kind": "all"
+      },
+      "dataSource": {
+        "kind": "query",
+        "columns": {
+          "value": "Neighbourhood"
+        },
+        "queryRef": {
+          "kind": "query",
+          "queryId": "5a25ea5d-40eb-467d-9b94-99130d9af1f7"
+        },
+        "autoReset": true
+      },
+      "showOnPages": {
+        "kind": "all"
+      }
+    }
+  ],
+  "dataSources": [
+    {
+      "kind": "kusto-trident",
+      "scopeId": "kusto-trident",
+      "clusterUri": "",
+      "database": "779ae675-d5a4-8c39-4b78-6326a6e084da",
+      "name": "BicycleEventhouse",
+      "id": "f0a5ed54-4189-4e2b-a435-c6545365b23e",
+      "workspace": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Page 1",
+      "id": "851c46ee-e4e2-43cd-97e9-c904f104a999"
+    },
+    {
+      "name": "Page 2",
+      "id": "5b97b5ca-af3d-4743-ba66-f5b6a3c97fe9"
+    }
+  ],
+  "queries": [
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "f0a5ed54-4189-4e2b-a435-c6545365b23e"
+      },
+      "text": "base_bike_data\n| project Neighbourhood, latest_observation, No_Bikes, No_Empty_Docks\n| order by Neighbourhood asc\n",
+      "id": "9f6f727c-9859-4dfd-bfba-c1a448b2fdae",
+      "usedVariables": [
+        "base_bike_data"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "f0a5ed54-4189-4e2b-a435-c6545365b23e"
+      },
+      "text": " base_bike_data\n     | project Neighbourhood, latest_observation, Latitude, Longitude, No_Bikes\n     | order by Neighbourhood asc",
+      "id": "00462e8d-1a3b-49a6-9d27-02aa1c020005",
+      "usedVariables": [
+        "base_bike_data"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "f0a5ed54-4189-4e2b-a435-c6545365b23e"
+      },
+      "text": "base_bike_data\n| project Neighbourhood, latest_observation\n| order by latest_observation desc\n",
+      "id": "c84a3515-cf83-44e1-851e-96799b4f6c00",
+      "usedVariables": [
+        "base_bike_data"
+      ]
+    },
+    {
+      "id": "91370783-4bc7-419f-afc3-0f70cf2d590c",
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "f0a5ed54-4189-4e2b-a435-c6545365b23e"
+      },
+      "text": "bikes\n     | where ingestion_time() between (ago(30min) .. now())\n          and (isempty( selected_neighbourhoods) or Neighbourhood in (selected_neighbourhoods))\n     | summarize latest_observation = arg_max(ingestion_time(), *) by Neighbourhood",
+      "usedVariables": [
+        "selected_neighbourhoods"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "f0a5ed54-4189-4e2b-a435-c6545365b23e"
+      },
+      "text": "bikes\n| distinct Neighbourhood\n| order by Neighbourhood asc\n",
+      "id": "5a25ea5d-40eb-467d-9b94-99130d9af1f7",
+      "usedVariables": []
+    }
+  ]
+}
