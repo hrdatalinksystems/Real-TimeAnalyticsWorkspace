@@ -11,6 +11,24 @@
   ],
   "destinations": [
     {
+      "id": "95137c52-a5b8-48b5-b602-cda2104b3b87",
+      "name": "a9007607-9ad9-4a4d-b1d9-0977854d5a58",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "DirectIngestion",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "eccdf5f0-7a04-8fdf-4d2c-e749e8f738f3",
+        "tableName": "stock",
+        "connectionName": null,
+        "mappingRuleName": null
+      },
+      "inputNodes": [
+        {
+          "name": "stock-data-stream"
+        }
+      ]
+    },
+    {
       "id": "e83792aa-9fc5-4560-837e-849e9294d6c3",
       "name": "6836471f-da8a-4a08-9de9-fc238e6d1fe6",
       "type": "Eventhouse",
